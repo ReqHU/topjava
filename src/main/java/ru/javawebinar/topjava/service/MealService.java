@@ -3,9 +3,9 @@ package ru.javawebinar.topjava.service;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
-import ru.javawebinar.topjava.repository.inmemory.InMemoryMealRepository;
 import ru.javawebinar.topjava.util.ValidationUtil;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 @Service
@@ -31,6 +31,10 @@ public class MealService {
 
     public Collection<Meal> getAll(int userId) {
         return repository.getAll(userId);
+    }
+
+    public Collection<Meal> getAllWithDateFilter(int userId, LocalDate start, LocalDate end) {
+        return repository.getAllWithDateFilter(userId, start, end);
     }
 
     public void update(int userId, Meal meal) {
