@@ -33,17 +33,29 @@ public class InMemoryMealRepository implements MealRepository {
             repository.get(userId).add(meal);
             return meal;
         }
-        return repository.get(userId).set(meal.getId(), meal);
+        try {
+            return repository.get(userId).set(meal.getId() - 1, meal);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     @Override
     public boolean delete(int userId, int mealId) {
-        return repository.get(userId).remove(mealId - 1) != null;
+        try {
+            return repository.get(userId).remove(mealId - 1) != null;
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
     }
 
     @Override
     public Meal get(int userId, int mealId) {
-        return repository.get(userId).get(mealId - 1);
+        try {
+            return repository.get(userId).get(mealId - 1);
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 
     @Override
