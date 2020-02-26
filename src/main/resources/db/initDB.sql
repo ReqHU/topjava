@@ -32,6 +32,6 @@ CREATE TABLE meals
     dateTime TIMESTAMP WITHOUT TIME ZONE NOT NULL,
     description VARCHAR NOT NULL,
     calories INTEGER NOT NULL,
-    CONSTRAINT meals_idx UNIQUE (id, user_id),
+    CONSTRAINT meals_idx UNIQUE (user_id, dateTime),
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
