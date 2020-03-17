@@ -33,11 +33,6 @@ public class JspMealController {
     @Autowired
     private MealService mealService;
 
-    @GetMapping("/")
-    public String root() {
-        return "index";
-    }
-
     @GetMapping("/meals")
     public void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
