@@ -22,6 +22,8 @@
         <intercept-url pattern="/profile/register" access="isAnonymous()"/>
 
         <intercept-url pattern="/**/admin/**" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/v2/**" access="hasRole('ADMIN')"/>
+        <intercept-url pattern="/swagger*" access="hasRole('ADMIN')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
 
         <form-login login-page="/login" default-target-url="/meals"
