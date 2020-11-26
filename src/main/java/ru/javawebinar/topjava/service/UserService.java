@@ -9,7 +9,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.Assert;
 import ru.javawebinar.topjava.AuthorizedUser;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
@@ -36,7 +35,8 @@ public class UserService implements UserDetailsService {
 
     @CacheEvict(value = "users", allEntries = true)
     public User create(User user) {
-        Assert.notNull(user, "user must not be null");
+        if (user == null)
+            throw new IllegalArgumentException("user must not be null");
         return prepareAndSave(user);
     }
 
@@ -50,7 +50,8 @@ public class UserService implements UserDetailsService {
     }
 
     public User getByEmail(String email) {
-        Assert.notNull(email, "email must not be null");
+        if (email == null)
+            throw new IllegalArgumentException("email must not be null");
         return checkNotFound(repository.getByEmail(email), "email=" + email);
     }
 
@@ -61,7 +62,8 @@ public class UserService implements UserDetailsService {
 
     @CacheEvict(value = "users", allEntries = true)
     public void update(User user) {
-        Assert.notNull(user, "user must not be null");
+        if (user == null)
+            throw new IllegalArgumentException("user must not be null");
 //      checkNotFoundWithId : check works only for JDBC, disabled
         prepareAndSave(user);
     }

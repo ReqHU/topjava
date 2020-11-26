@@ -1,7 +1,6 @@
 package ru.javawebinar.topjava.model;
 
 import org.hibernate.Hibernate;
-import org.springframework.util.Assert;
 import ru.javawebinar.topjava.HasId;
 
 import javax.persistence.*;
@@ -39,7 +38,8 @@ public abstract class AbstractBaseEntity implements HasId {
 
     // doesn't work for hibernate lazy proxy
     public int id() {
-        Assert.notNull(id, "Entity must has id");
+        if (id == null)
+            throw new IllegalArgumentException("Entity must has id");
         return id;
     }
 
