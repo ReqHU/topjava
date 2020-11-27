@@ -27,7 +27,7 @@ class InMemoryAdminRestControllerSpringTest {
     @Test
     void delete() throws Exception {
         controller.delete(USER_ID);
-        Assertions.assertNull(repository.get(USER_ID));
+        Assertions.assertNull(repository.get(USER_ID).orElse(null));
     }
 
     @Test

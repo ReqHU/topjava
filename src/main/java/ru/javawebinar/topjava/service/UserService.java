@@ -14,11 +14,11 @@ import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.util.List;
 
 import static ru.javawebinar.topjava.util.UserUtil.prepareToSave;
-import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFound;
 import static ru.javawebinar.topjava.util.ValidationUtil.checkNotFoundWithId;
 
 @Service("userService")
@@ -46,13 +46,13 @@ public class UserService implements UserDetailsService {
     }
 
     public User get(int id) {
-        return checkNotFoundWithId(repository.get(id), id);
+        return repository.get(id).orElseThrow(() -> new NotFoundException("id=" + id));
     }
 
     public User getByEmail(String email) {
         if (email == null)
             throw new IllegalArgumentException("email must not be null");
-        return checkNotFound(repository.getByEmail(email), "email=" + email);
+        return repository.getByEmail(email).orElseThrow(() -> new NotFoundException("email=" + email));
     }
 
     @Cacheable("users")
@@ -78,17 +78,15 @@ public class UserService implements UserDetailsService {
     @CacheEvict(value = "users", allEntries = true)
     @Transactional
     public void enable(int id, boolean enabled) {
-        User user = checkNotFoundWithId(get(id), id);
+        User user = get(id);
         user.setEnabled(enabled);
         repository.save(user);  // !! need only for JDBC implementation
     }
 
     @Override
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.getByEmail(email.toLowerCase());
-        if (user == null) {
-            throw new UsernameNotFoundException("User " + email + " is not found");
-        }
+        User user = repository.getByEmail(email.toLowerCase())
+                .orElseThrow(() -> new UsernameNotFoundException("User " + email + " is not found"));
         return new AuthorizedUser(user);
     }
 
@@ -97,6 +95,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User getWithMeals(int id) {
-        return checkNotFoundWithId(repository.getWithMeals(id), id);
+        return repository.getWithMeals(id).orElseThrow(() -> new NotFoundException("id=" + id));
     }
 }

@@ -7,6 +7,7 @@ import ru.javawebinar.topjava.repository.MealRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DataJpaMealRepository implements MealRepository {
@@ -21,12 +22,12 @@ public class DataJpaMealRepository implements MealRepository {
 
     @Override
     @Transactional
-    public Meal save(Meal meal, int userId) {
-        if (!meal.isNew() && get(meal.id(), userId) == null) {
-            return null;
+    public Optional<Meal> save(Meal meal, int userId) {
+        if (!meal.isNew() && get(meal.id(), userId).isEmpty()) {
+            return Optional.empty();
         }
         meal.setUser(crudUserRepository.getOne(userId));
-        return crudMealRepository.save(meal);
+        return Optional.of(crudMealRepository.save(meal));
     }
 
     @Override
@@ -35,8 +36,8 @@ public class DataJpaMealRepository implements MealRepository {
     }
 
     @Override
-    public Meal get(int id, int userId) {
-        return crudMealRepository.findById(id).filter(meal -> meal.getUser().getId() == userId).orElse(null);
+    public Optional<Meal> get(int id, int userId) {
+        return crudMealRepository.findById(id).filter(meal -> meal.getUser().getId() == userId);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class DataJpaMealRepository implements MealRepository {
     }
 
     @Override
-    public Meal getWithUser(int id, int userId) {
+    public Optional<Meal> getWithUser(int id, int userId) {
         return crudMealRepository.getWithUser(id, userId);
     }
 }

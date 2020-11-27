@@ -30,7 +30,7 @@ public abstract class AbstractMealServiceTest extends AbstractServiceTest {
     @Test
     void delete() throws Exception {
         service.delete(MEAL1_ID, USER_ID);
-        Assertions.assertNull(repository.get(MEAL1_ID, USER_ID));
+        Assertions.assertNull(repository.get(MEAL1_ID, USER_ID).orElse(null));
     }
 
     @Test

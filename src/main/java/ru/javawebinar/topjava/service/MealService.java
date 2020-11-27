@@ -4,6 +4,7 @@ import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 import ru.javawebinar.topjava.model.Meal;
 import ru.javawebinar.topjava.repository.MealRepository;
+import ru.javawebinar.topjava.util.exception.NotFoundException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,7 +23,7 @@ public class MealService {
     }
 
     public Meal get(int id, int userId) {
-        return checkNotFoundWithId(repository.get(id, userId), id);
+        return repository.get(id, userId).orElseThrow(() -> new NotFoundException("id=" + id));
     }
 
     public void delete(int id, int userId) {
@@ -40,16 +41,16 @@ public class MealService {
     public void update(Meal meal, int userId) {
         if (meal == null)
             throw new IllegalArgumentException("meal must not be null");
-        checkNotFoundWithId(repository.save(meal, userId), meal.id());
+        repository.save(meal, userId).orElseThrow(() -> new NotFoundException("id=" + meal.id()));
     }
 
     public Meal create(Meal meal, int userId) {
         if (meal == null)
             throw new IllegalArgumentException("meal must not be null");
-        return repository.save(meal, userId);
+        return repository.save(meal, userId).orElseThrow();
     }
 
     public Meal getWithUser(int id, int userId) {
-        return checkNotFoundWithId(repository.getWithUser(id, userId), id);
+        return repository.getWithUser(id, userId).orElseThrow(() -> new NotFoundException("id=" + id));
     }
 }

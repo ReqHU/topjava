@@ -6,6 +6,7 @@ import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class DataJpaUserRepository implements UserRepository {
@@ -28,12 +29,12 @@ public class DataJpaUserRepository implements UserRepository {
     }
 
     @Override
-    public User get(int id) {
-        return crudRepository.findById(id).orElse(null);
+    public Optional<User> get(int id) {
+        return crudRepository.findById(id);
     }
 
     @Override
-    public User getByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         return crudRepository.getByEmail(email);
     }
 
@@ -43,7 +44,7 @@ public class DataJpaUserRepository implements UserRepository {
     }
 
     @Override
-    public User getWithMeals(int id) {
+    public Optional<User> getWithMeals(int id) {
         return crudRepository.getWithMeals(id);
     }
 }

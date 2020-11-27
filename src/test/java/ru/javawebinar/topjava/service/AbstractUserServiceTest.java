@@ -44,7 +44,7 @@ public abstract class AbstractUserServiceTest extends AbstractServiceTest {
     @Test
     public void delete() throws Exception {
         service.delete(USER_ID);
-        Assertions.assertNull(repository.get(USER_ID));
+        Assertions.assertNull(repository.get(USER_ID).orElse(null));
     }
 
     @Test

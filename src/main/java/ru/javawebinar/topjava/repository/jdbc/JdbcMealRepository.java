@@ -15,6 +15,7 @@ import ru.javawebinar.topjava.util.ValidationUtil;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -39,7 +40,7 @@ public class JdbcMealRepository implements MealRepository {
 
     @Override
     @Transactional
-    public Meal save(Meal meal, int userId) {
+    public Optional<Meal> save(Meal meal, int userId) {
         ValidationUtil.validate(meal);
 
         MapSqlParameterSource map = new MapSqlParameterSource()
@@ -58,10 +59,10 @@ public class JdbcMealRepository implements MealRepository {
                             "   SET description=:description, calories=:calories, date_time=:date_time " +
                             " WHERE id=:id AND user_id=:user_id"
                     , map) == 0) {
-                return null;
+                return Optional.empty();
             }
         }
-        return meal;
+        return Optional.of(meal);
     }
 
     @Override
@@ -71,10 +72,10 @@ public class JdbcMealRepository implements MealRepository {
     }
 
     @Override
-    public Meal get(int id, int userId) {
+    public Optional<Meal> get(int id, int userId) {
         List<Meal> meals = jdbcTemplate.query(
                 "SELECT * FROM meals WHERE id = ? AND user_id = ?", ROW_MAPPER, id, userId);
-        return DataAccessUtils.singleResult(meals);
+        return Optional.ofNullable(DataAccessUtils.singleResult(meals));
     }
 
     @Override

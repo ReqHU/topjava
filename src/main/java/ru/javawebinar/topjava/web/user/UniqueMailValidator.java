@@ -9,6 +9,8 @@ import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
 import ru.javawebinar.topjava.web.ExceptionInfoHandler;
 
+import java.util.Optional;
+
 
 @Component
 public class UniqueMailValidator implements org.springframework.validation.Validator {
@@ -24,8 +26,8 @@ public class UniqueMailValidator implements org.springframework.validation.Valid
     @Override
     public void validate(Object target, Errors errors) {
         HasIdAndEmail user = ((HasIdAndEmail) target);
-        User dbUser = repository.getByEmail(user.getEmail().toLowerCase());
-        if (dbUser != null && !dbUser.getId().equals(user.getId())) {
+        Optional<User> dbUser = repository.getByEmail(user.getEmail().toLowerCase());
+        if (dbUser.isPresent() && !dbUser.get().getId().equals(user.getId())) {
             errors.rejectValue("email", ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL);
         }
     }

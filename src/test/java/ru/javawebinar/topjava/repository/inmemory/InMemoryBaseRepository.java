@@ -5,6 +5,7 @@ import ru.javawebinar.topjava.model.AbstractBaseEntity;
 import java.util.Collection;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -12,7 +13,7 @@ import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
 
 public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
 
-    private static AtomicInteger counter = new AtomicInteger(START_SEQ);
+    private static final AtomicInteger counter = new AtomicInteger(START_SEQ);
 
     Map<Integer, T> map = new ConcurrentHashMap<>();
 
@@ -30,8 +31,8 @@ public class InMemoryBaseRepository<T extends AbstractBaseEntity> {
         return map.remove(id) != null;
     }
 
-    public T get(int id) {
-        return map.get(id);
+    public Optional<T> get(int id) {
+        return Optional.ofNullable(map.get(id));
     }
 
     Collection<T> getCollection() {

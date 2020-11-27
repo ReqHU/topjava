@@ -10,6 +10,7 @@ import ru.javawebinar.topjava.repository.UserRepository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
@@ -30,8 +31,8 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public User get(int id) {
-        return em.find(User.class, id);
+    public Optional<User> get(int id) {
+        return Optional.ofNullable(em.find(User.class, id));
     }
 
     @Override
@@ -43,12 +44,12 @@ public class JpaUserRepository implements UserRepository {
     }
 
     @Override
-    public User getByEmail(String email) {
+    public Optional<User> getByEmail(String email) {
         List<User> users = em.createNamedQuery(User.BY_EMAIL, User.class)
                 .setParameter(1, email)
                 .setHint(QueryHints.HINT_PASS_DISTINCT_THROUGH, false)
                 .getResultList();
-        return DataAccessUtils.singleResult(users);
+        return Optional.ofNullable(DataAccessUtils.singleResult(users));
     }
 
     @Override

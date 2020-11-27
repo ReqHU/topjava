@@ -19,10 +19,11 @@ import java.util.stream.Collectors;
 
 @Repository
 public class InMemoryMealRepository implements MealRepository {
+
     private static final Logger log = LoggerFactory.getLogger(InMemoryMealRepository.class);
 
     // Map  userId -> mealRepository
-    private Map<Integer, InMemoryBaseRepository<Meal>> usersMealsMap = new ConcurrentHashMap<>();
+    private final Map<Integer, InMemoryBaseRepository<Meal>> usersMealsMap = new ConcurrentHashMap<>();
 
     {
         var userMeals = new InMemoryBaseRepository<Meal>();
@@ -30,12 +31,11 @@ public class InMemoryMealRepository implements MealRepository {
         usersMealsMap.put(UserTestData.USER_ID, userMeals);
     }
 
-
     @Override
-    public Meal save(Meal meal, int userId) {
+    public Optional<Meal> save(Meal meal, int userId) {
         Objects.requireNonNull(meal, "meal must not be null");
         var meals = usersMealsMap.computeIfAbsent(userId, uid -> new InMemoryBaseRepository<>());
-        return meals.save(meal);
+        return Optional.ofNullable(meals.save(meal));
     }
 
     @PostConstruct
@@ -55,9 +55,9 @@ public class InMemoryMealRepository implements MealRepository {
     }
 
     @Override
-    public Meal get(int id, int userId) {
+    public Optional<Meal> get(int id, int userId) {
         var meals = usersMealsMap.get(userId);
-        return meals == null ? null : meals.get(id);
+        return meals == null ? Optional.empty() : meals.get(id);
     }
 
     @Override

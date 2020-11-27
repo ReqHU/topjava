@@ -4,16 +4,16 @@ import ru.javawebinar.topjava.model.Meal;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public interface MealRepository {
     // null if updated meal do not belong to userId
-    Meal save(Meal meal, int userId);
+    Optional<Meal> save(Meal meal, int userId);
 
     // false if meal do not belong to userId
     boolean delete(int id, int userId);
 
-    // null if meal do not belong to userId
-    Meal get(int id, int userId);
+    Optional<Meal> get(int id, int userId);
 
     // ORDERED dateTime desc
     List<Meal> getAll(int userId);
@@ -21,7 +21,7 @@ public interface MealRepository {
     // ORDERED dateTime desc
     List<Meal> getBetweenHalfOpen(LocalDateTime startDateTime, LocalDateTime endDateTime, int userId);
 
-    default Meal getWithUser(int id, int userId) {
+    default Optional<Meal> getWithUser(int id, int userId) {
         throw new UnsupportedOperationException();
     }
 }
