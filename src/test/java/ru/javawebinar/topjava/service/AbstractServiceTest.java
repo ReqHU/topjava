@@ -5,8 +5,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
-import ru.javawebinar.topjava.ActiveDbProfileResolver;
-import ru.javawebinar.topjava.TimingExtension;
+import ru.javawebinar.topjava.util.profileResolver.ActiveDbProfileResolver;
+import ru.javawebinar.topjava.util.TimingExtension;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static ru.javawebinar.topjava.util.ValidationUtil.getRootCause;

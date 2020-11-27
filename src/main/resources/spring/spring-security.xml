@@ -39,4 +39,5 @@
             <password-encoder ref="passwordEncoder"/>
         </authentication-provider>
     </authentication-manager>
+
 </beans:beans>

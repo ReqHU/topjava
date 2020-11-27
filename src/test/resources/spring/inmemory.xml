@@ -5,9 +5,10 @@
 
     <context:component-scan base-package="ru.javawebinar.topjava.**.repository.inmemory"/>
     <context:component-scan base-package="ru.javawebinar.**.service"/>
-    <context:component-scan base-package="ru.javawebinar.topjava.**.web.user"/>
-    <context:component-scan base-package="ru.javawebinar.topjava.**.web.meal"/>
+    <context:component-scan base-package="ru.javawebinar.topjava.**.controller"/>
 
+    <bean class="ru.javawebinar.topjava.helper.UniqueMailValidator" id="uniqueMailValidator"/>
     <bean class="ru.javawebinar.topjava.configuration.ObjectMapperConfig" id="objectMapperConfig"/>
     <bean class="org.springframework.security.crypto.password.NoOpPasswordEncoder" id="passwordEncoder"/>
+
 </beans>

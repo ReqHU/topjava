@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import ru.javawebinar.topjava.model.Role;
 import ru.javawebinar.topjava.model.User;
 import ru.javawebinar.topjava.repository.UserRepository;
-import ru.javawebinar.topjava.util.exception.NotFoundException;
+import ru.javawebinar.topjava.exception.NotFoundException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.Date;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static ru.javawebinar.topjava.UserTestData.*;
+import static ru.javawebinar.topjava.util.testData.UserTestData.*;
 
 public abstract class AbstractUserServiceTest extends AbstractServiceTest {
 
