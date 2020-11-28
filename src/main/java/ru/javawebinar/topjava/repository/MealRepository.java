@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface MealRepository {
+
     // null if updated meal do not belong to userId
     Optional<Meal> save(Meal meal, int userId);
 
@@ -24,4 +25,5 @@ public interface MealRepository {
     default Optional<Meal> getWithUser(int id, int userId) {
         throw new UnsupportedOperationException();
     }
+
 }

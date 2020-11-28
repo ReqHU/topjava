@@ -111,4 +111,5 @@ public abstract class AbstractUserController {
             throw new ModificationRestrictionException();
         }
     }
+
 }

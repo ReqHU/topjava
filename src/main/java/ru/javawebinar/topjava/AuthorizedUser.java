@@ -5,6 +5,7 @@ import ru.javawebinar.topjava.to.UserTo;
 import ru.javawebinar.topjava.util.UserUtil;
 
 public class AuthorizedUser extends org.springframework.security.core.userdetails.User {
+
     private static final long serialVersionUID = 1L;
 
     private UserTo userTo;
@@ -30,4 +31,5 @@ public class AuthorizedUser extends org.springframework.security.core.userdetail
     public String toString() {
         return userTo.toString();
     }
+
 }

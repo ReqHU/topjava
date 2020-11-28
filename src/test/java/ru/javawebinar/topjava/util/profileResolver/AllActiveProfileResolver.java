@@ -10,4 +10,5 @@ public class AllActiveProfileResolver implements ActiveProfilesResolver {
     public String[] resolve(Class<?> aClass) {
         return new String[]{Profiles.REPOSITORY_IMPLEMENTATION, Profiles.getActiveDbProfile()};
     }
+
 }

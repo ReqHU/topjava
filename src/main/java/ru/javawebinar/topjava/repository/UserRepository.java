@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository {
+
     // null if not found, when updated
     User save(User user);
 
@@ -21,4 +22,5 @@ public interface UserRepository {
     default Optional<User> getWithMeals(int id) {
         throw new UnsupportedOperationException();
     }
+
 }

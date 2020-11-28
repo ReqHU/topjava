@@ -37,4 +37,5 @@ public class InMemoryUserRepository extends InMemoryBaseRepository<User> impleme
                 .filter(u -> email.equals(u.getEmail()))
                 .findFirst();
     }
+
 }

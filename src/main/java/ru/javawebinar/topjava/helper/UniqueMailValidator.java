@@ -29,4 +29,5 @@ public class UniqueMailValidator implements org.springframework.validation.Valid
             errors.rejectValue("email", ExceptionInfoHandler.EXCEPTION_DUPLICATE_EMAIL);
         }
     }
+
 }

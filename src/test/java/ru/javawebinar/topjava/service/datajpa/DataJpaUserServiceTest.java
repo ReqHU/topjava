@@ -13,6 +13,7 @@ import static ru.javawebinar.topjava.util.testData.UserTestData.*;
 
 @ActiveProfiles(DATAJPA)
 class DataJpaUserServiceTest extends AbstractUserServiceTest {
+
     @Test
     void getWithMeals() throws Exception {
         User admin = service.getWithMeals(ADMIN_ID);
@@ -25,4 +26,5 @@ class DataJpaUserServiceTest extends AbstractUserServiceTest {
         Assertions.assertThrows(NotFoundException.class,
                 () -> service.getWithMeals(1));
     }
+
 }

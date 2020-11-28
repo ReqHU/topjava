@@ -199,4 +199,5 @@ class MealRestControllerTest extends AbstractControllerTest {
                 .andExpect(errorType(VALIDATION_ERROR))
                 .andDo(print());
     }
+
 }

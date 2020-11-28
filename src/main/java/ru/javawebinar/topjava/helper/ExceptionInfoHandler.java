@@ -29,6 +29,7 @@ import static ru.javawebinar.topjava.helper.ErrorType.*;
 @RestControllerAdvice(annotations = RestController.class)
 @Order(Ordered.HIGHEST_PRECEDENCE + 5)
 public class ExceptionInfoHandler {
+
     private static final Logger log = LoggerFactory.getLogger(ExceptionInfoHandler.class);
 
     public static final String EXCEPTION_DUPLICATE_EMAIL = "exception.user.duplicateEmail";
@@ -98,4 +99,5 @@ public class ExceptionInfoHandler {
                 messageSourceAccessor.getMessage(errorType.getErrorCode()),
                 details.length != 0 ? details : new String[]{ValidationUtil.getMessage(rootCause)});
     }
+
 }

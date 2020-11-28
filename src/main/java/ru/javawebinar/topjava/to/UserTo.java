@@ -87,4 +87,5 @@ public class UserTo extends BaseTo implements HasIdAndEmail, Serializable {
                 ", caloriesPerDay='" + caloriesPerDay + '\'' +
                 '}';
     }
+
 }

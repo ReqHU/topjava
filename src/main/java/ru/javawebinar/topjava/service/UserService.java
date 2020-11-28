@@ -97,4 +97,5 @@ public class UserService implements UserDetailsService {
     public User getWithMeals(int id) {
         return repository.getWithMeals(id).orElseThrow(() -> new NotFoundException("id=" + id));
     }
+
 }

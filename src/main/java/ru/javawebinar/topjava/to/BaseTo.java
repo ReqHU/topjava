@@ -22,4 +22,5 @@ public abstract class BaseTo implements HasId {
     public void setId(Integer id) {
         this.id = id;
     }
+
 }

@@ -29,6 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @ActiveProfiles(resolver = AllActiveProfileResolver.class)
 abstract public class AbstractControllerTest {
+
     private static final Locale RU_LOCALE = new Locale("ru");
     private static final CharacterEncodingFilter CHARACTER_ENCODING_FILTER = new CharacterEncodingFilter();
 
@@ -69,4 +70,5 @@ abstract public class AbstractControllerTest {
     public ResultMatcher detailMessage(String code) {
         return jsonPath("$.details").value(getMessage(code));
     }
+
 }

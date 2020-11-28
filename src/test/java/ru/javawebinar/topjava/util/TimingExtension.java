@@ -33,4 +33,5 @@ public class TimingExtension implements
     public void afterAll(ExtensionContext extensionContext) throws Exception {
         log.info('\n' + stopWatch.prettyPrint() + '\n');
     }
+
 }

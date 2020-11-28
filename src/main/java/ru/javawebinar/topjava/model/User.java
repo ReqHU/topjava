@@ -157,4 +157,5 @@ public class User extends AbstractNamedEntity implements HasIdAndEmail {
                 ", caloriesPerDay=" + caloriesPerDay +
                 '}';
     }
+
 }

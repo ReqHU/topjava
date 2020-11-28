@@ -53,4 +53,5 @@ public class ProfileUIController extends AbstractUserController {
         status.setComplete();
         return "redirect:/login?message=app.registered&username=" + userTo.getEmail();
     }
+
 }

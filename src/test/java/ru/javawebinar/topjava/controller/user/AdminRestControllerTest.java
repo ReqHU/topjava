@@ -197,4 +197,5 @@ class AdminRestControllerTest extends AbstractControllerTest {
                 .andDo(print());
 
     }
+
 }

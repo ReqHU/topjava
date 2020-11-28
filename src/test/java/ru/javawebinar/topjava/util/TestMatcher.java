@@ -8,6 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static ru.javawebinar.topjava.util.TestUtil.readListFromJsonMvcResult;
 
 public class TestMatcher<T> {
+
     private final Class<T> clazz;
     private final String[] fieldsToIgnore;
     private final boolean usingEquals;
@@ -57,4 +58,5 @@ public class TestMatcher<T> {
     public ResultMatcher contentJson(Iterable<T> expected) {
         return result -> assertMatch(readListFromJsonMvcResult(result, clazz), expected);
     }
+
 }

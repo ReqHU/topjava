@@ -38,4 +38,5 @@ class JsonUtilTest {
         User user = JsonUtil.readValue(jsonWithPass, User.class);
         assertEquals(user.getPassword(), "newPass");
     }
+
 }

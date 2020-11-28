@@ -107,4 +107,5 @@ class ProfileRestControllerTest extends AbstractControllerTest {
                 .andExpect(detailMessage(EXCEPTION_DUPLICATE_EMAIL))
                 .andDo(print());
     }
+
 }

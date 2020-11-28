@@ -72,4 +72,5 @@ public class AdminRestController extends AbstractUserController {
     public void enable(@PathVariable int id, @RequestParam boolean enabled) {
         super.enable(id, enabled);
     }
+
 }

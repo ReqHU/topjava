@@ -66,4 +66,5 @@ public class MealTo extends BaseTo {
                 ", excess=" + excess +
                 '}';
     }
+
 }

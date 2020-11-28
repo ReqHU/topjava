@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava.helper;
 
 public class ErrorInfo {
+
     private final String url;
     private final ErrorType type;
     private final String typeMessage;
@@ -12,4 +13,5 @@ public class ErrorInfo {
         this.typeMessage = typeMessage;
         this.details = details;
     }
+
 }

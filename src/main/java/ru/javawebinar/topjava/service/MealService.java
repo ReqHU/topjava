@@ -53,4 +53,5 @@ public class MealService {
     public Meal getWithUser(int id, int userId) {
         return repository.getWithUser(id, userId).orElseThrow(() -> new NotFoundException("id=" + id));
     }
+
 }

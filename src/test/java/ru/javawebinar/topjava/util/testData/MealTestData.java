@@ -11,6 +11,7 @@ import static java.time.LocalDateTime.of;
 import static ru.javawebinar.topjava.model.AbstractBaseEntity.START_SEQ;
 
 public class MealTestData {
+
     public static TestMatcher<Meal> MEAL_MATCHER = TestMatcher.usingFieldsComparator(Meal.class, "user");
     public static TestMatcher<MealTo> MEAL_TO_MATCHER = TestMatcher.usingEquals(MealTo.class);
 
@@ -36,4 +37,5 @@ public class MealTestData {
     public static Meal getUpdated() {
         return new Meal(MEAL1_ID, MEAL1.getDateTime(), "Обновленный завтрак", 200);
     }
+
 }

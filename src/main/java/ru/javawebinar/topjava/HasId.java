@@ -1,6 +1,7 @@
 package ru.javawebinar.topjava;
 
 public interface HasId {
+
     Integer getId();
 
     void setId(Integer id);
@@ -15,4 +16,5 @@ public interface HasId {
             throw new IllegalArgumentException("Entity must has id");
         return getId();
     }
+
 }

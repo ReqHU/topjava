@@ -17,6 +17,7 @@ import static ru.javawebinar.topjava.util.TestUtil.mockAuthorize;
 import static ru.javawebinar.topjava.util.testData.UserTestData.USER;
 
 public class SpringMain {
+
     public static void main(String[] args) {
         // java 7 automatic resource management
         try (GenericXmlApplicationContext appCtx = new GenericXmlApplicationContext()) {
@@ -41,4 +42,5 @@ public class SpringMain {
             System.out.println(mealController.getBetween(null, null, null, null));
         }
     }
+
 }
