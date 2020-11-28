@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.controller.user;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,17 +20,20 @@ public class AdminRestController extends AbstractUserController {
 
     public static final String REST_URL = "/rest/admin/users";
 
+    @ApiOperation(value = "Returns list of all users.")
     @GetMapping
     public List<User> getAll() {
         return super.getAll();
     }
 
     @Override
+    @ApiOperation(value = "Returns user by its id.")
     @GetMapping("/{id}")
     public User get(@PathVariable int id) {
         return super.get(id);
     }
 
+    @ApiOperation(value = "Creates new user and returns it.")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<User> createWithLocation(@Validated(View.Web.class) @RequestBody User user) {
         User created = super.create(user);
@@ -40,12 +44,14 @@ public class AdminRestController extends AbstractUserController {
     }
 
     @Override
+    @ApiOperation(value = "Removes user by its id.")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
         super.delete(id);
     }
 
+    @ApiOperation(value = "Updates user.")
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@RequestBody User user, @PathVariable int id) throws BindException {
@@ -53,12 +59,14 @@ public class AdminRestController extends AbstractUserController {
         service.update(user);
     }
 
+    @ApiOperation(value = "Returns user by its email.")
     @GetMapping("/by")
     public User getByMail(@RequestParam String email) {
         return super.getByMail(email);
     }
 
     @Override
+    @ApiOperation(value = "Activates/deactivates user by its id.")
     @PatchMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void enable(@PathVariable int id, @RequestParam boolean enabled) {

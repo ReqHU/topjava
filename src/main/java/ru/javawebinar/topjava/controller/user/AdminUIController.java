@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.controller.user;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,18 +15,21 @@ import java.util.List;
 public class AdminUIController extends AbstractUserController {
 
     @Override
+    @ApiOperation(value = "Returns list of all users.")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
         return super.getAll();
     }
 
     @Override
+    @ApiOperation(value = "Returns user by its id.")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public User get(@PathVariable int id) {
         return super.get(id);
     }
 
     @Override
+    @ApiOperation(value = "Removes user by its id.")
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
@@ -33,6 +37,7 @@ public class AdminUIController extends AbstractUserController {
     }
 
     @PostMapping
+    @ApiOperation(value = "Creates/updates user.")
     public void createOrUpdate(@Valid UserTo userTo) {
         if (userTo.isNew()) {
             super.create(userTo);
@@ -42,6 +47,7 @@ public class AdminUIController extends AbstractUserController {
     }
 
     @Override
+    @ApiOperation(value = "Activates/deactivates user by its id.")
     @PostMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void enable(@PathVariable int id, @RequestParam boolean enabled) {

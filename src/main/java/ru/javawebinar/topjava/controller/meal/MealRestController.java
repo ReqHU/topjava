@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.controller.meal;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +24,14 @@ public class MealRestController extends AbstractMealController {
     public static final String REST_URL = "/rest/profile/meals";
 
     @Override
+    @ApiOperation(value = "Returns meal by its id.")
     @GetMapping("/{id}")
     public Meal get(@PathVariable int id) {
         return super.get(id);
     }
 
     @Override
+    @ApiOperation(value = "Removes meal by its id.")
     @DeleteMapping("/{id}")
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) {
@@ -36,18 +39,21 @@ public class MealRestController extends AbstractMealController {
     }
 
     @Override
+    @ApiOperation(value = "Returns list of all meals.")
     @GetMapping
     public List<MealTo> getAll() {
         return super.getAll();
     }
 
     @Override
+    @ApiOperation(value = "Updates meal.")
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void update(@Validated(View.Web.class) @RequestBody Meal meal, @PathVariable int id) {
         super.update(meal, id);
     }
 
+    @ApiOperation(value = "Creates new meal and returns it.")
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Meal> createWithLocation(@Validated(View.Web.class) @RequestBody Meal meal) {
         Meal created = super.create(meal);
@@ -60,6 +66,7 @@ public class MealRestController extends AbstractMealController {
     }
 
     @Override
+    @ApiOperation(value = "Filters meals.")
     @GetMapping(value = "/filter")
     public List<MealTo> getBetween(
             @RequestParam @Nullable LocalDate startDate,

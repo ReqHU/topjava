@@ -1,5 +1,6 @@
 package ru.javawebinar.topjava.controller.user;
 
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,17 +21,20 @@ public class ProfileRestController extends AbstractUserController {
 
     public static final String REST_URL = "/rest/profile";
 
+    @ApiOperation(value = "Returns user profile.")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public User get(@AuthenticationPrincipal AuthorizedUser authUser) {
         return super.get(authUser.getId());
     }
 
+    @ApiOperation(value = "Removes user profile.")
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@AuthenticationPrincipal AuthorizedUser authUser) {
         super.delete(authUser.getId());
     }
 
+    @ApiOperation(value = "Registers new user.")
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.CREATED)
     public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
@@ -40,6 +44,7 @@ public class ProfileRestController extends AbstractUserController {
         return ResponseEntity.created(uriOfNewResource).body(created);
     }
 
+    @ApiOperation(value = "Updates user profile.")
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody UserTo userTo, @AuthenticationPrincipal AuthorizedUser authUser) throws BindException {
@@ -47,6 +52,7 @@ public class ProfileRestController extends AbstractUserController {
         service.update(userTo);
     }
 
+    @ApiOperation(value = "Tests UTF.")
     @GetMapping(value = "/text")
     public String testUTF() {
         return "Русский текст";
