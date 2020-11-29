@@ -64,7 +64,7 @@ public class UserService implements UserDetailsService {
     public void update(User user) {
         if (user == null)
             throw new IllegalArgumentException("user must not be null");
-//      checkNotFoundWithId : check works only for JDBC, disabled
+        //checkNotFoundWithId : check works only for JDBC, disabled
         prepareAndSave(user);
     }
 
