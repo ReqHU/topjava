@@ -27,6 +27,9 @@ public class ObjectMapperConfig {
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.registerModule(new Hibernate5Module());
+        objectMapper.registerModule(new JavaTimeModule());
+
+        objectMapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.NONE);
         objectMapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
